@@ -1,15 +1,20 @@
 import {Animated, View, StyleSheet} from "react-native";
 import Image = Animated.Image;
+import {useEffect} from "react";
 
-export default function Avatar({size = 58}){
+export default function Avatar({size = 58, url = '/uploads/apartment_b7161e67e5.jpg'}) {
+
+    useEffect(() => {
+    }, [url])
+
     return (
         <View>
             <Image source={{
-                uri: 'https://t4.ftcdn.net/jpg/04/48/70/33/360_F_448703360_Yl1j5l882016Uzmo52mqGx2eu9h07Apt.jpg',
+                uri: "http://192.168.86.47:1337" + url,
                 width: size,
                 height: size
             }}
-                   borderRadius={size/2}
+                   borderRadius={size / 2}
             />
         </View>
     )

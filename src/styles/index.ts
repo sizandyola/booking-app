@@ -9,11 +9,33 @@ import { StyleSheet} from 'react-native'
 export {Colors, Typohraphy};
 
 export const lucyStyle = StyleSheet.create({
+
+
     ...Typohraphy.fontSize,
     ...Spacing.spacing,
 
+    textMedium:{
+        fontSize: Typohraphy.fontSize.md.fontSize,
+        color: '#0f0f15'
+
+    },
+
+    textDanger:{
+        color: 'red'
+    },
+
     container:{
         flex: 1,
+    },
+
+    textCenter:{
+        textAlign: 'center'
+    },
+    textLeft:{
+        textAlign: 'left'
+    },
+    textRight:{
+        textAlign: 'right'
     },
 
 

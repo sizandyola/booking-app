@@ -1,31 +1,32 @@
 import React, {ReactNode} from "react";
-import {View, Text, StyleSheet, Animated} from "react-native";
+import {View, Text, StyleSheet, Animated, StyleProp, ViewStyle} from "react-native";
 import Image = Animated.Image;
 import {lucyStyle} from "../styles";
 
 
 type CardProps = {
-    children: ReactNode
+    children: ReactNode,
+    style?: StyleProp<ViewStyle>
 }
 export default function Card(props: CardProps): React.JSX.Element {
     return (
-        <View style={styles.card}>
+        <View style={[styles.card, props.style]}>
             {props.children}
         </View>
     )
 }
 
-export function ImagedCard(): React.JSX.Element {
+export function ImagedCard(url = '/uploads/apartment_b7161e67e5.jpg'): React.JSX.Element {
     return (
-        <View>
+        <View style={{width: '100%'}}>
             <Card>
                 <View style={styles.imageCardTextContainer}>
-                    <Text style={[lucyStyle.lg]}>Cricket match</Text>
-                    <Text style={[lucyStyle.xm]}>Tudhikhel, Kathmandu</Text>
+                    <Text style={[lucyStyle.lg]}>Placeholder property</Text>
+                    <Text style={[lucyStyle.xm]}>Basantapur, Kathmandu</Text>
                     <View style={[lucyStyle.flexRow, lucyStyle.justifyBetween, lucyStyle.mt5]}>
                         <View>
                             <Text style={[]}>Date</Text>
-                            <Text>Tomorrow</Text>
+                            <Text>12/12/2023</Text>
                         </View>
                         <View>
                             <Text>Price</Text>
@@ -37,7 +38,7 @@ export function ImagedCard(): React.JSX.Element {
             <Image
                 borderRadius={24}
                 source={{
-                    uri: 'https://t4.ftcdn.net/jpg/04/48/70/33/360_F_448703360_Yl1j5l882016Uzmo52mqGx2eu9h07Apt.jpg'
+                    uri: "http://192.168.86.47:1337" + '/uploads/apartment_b7161e67e5.jpg',
                 }}
                 style={styles.cardImage}
             />
@@ -45,20 +46,29 @@ export function ImagedCard(): React.JSX.Element {
     )
 }
 
-export function HorizontalImageCard() {
+type horizontalImageCardProps = {
+    width: number | string | any;
+    height: number | string | any;
+    style?: StyleProp<ViewStyle>
+    children?: any;
+    image: any;
+}
+
+export function HorizontalImageCard(props: horizontalImageCardProps) {
     return (
         <View>
             <Card>
                 <Image
                     borderRadius={8}
                     source={{
-                        uri: 'https://t4.ftcdn.net/jpg/04/48/70/33/360_F_448703360_Yl1j5l882016Uzmo52mqGx2eu9h07Apt.jpg'
+                        uri: props.image ? props.image: 'https://t4.ftcdn.net/jpg/04/48/70/33/360_F_448703360_Yl1j5l882016Uzmo52mqGx2eu9h07Apt.jpg'
                     }}
-                    style={styles.horizontalCardImage}
+                    style={[styles.horizontalCardImage, {width: props.width, height: props.height}]}
                 />
                 <View style={[lucyStyle.mt3]}>
-                    <Text style={lucyStyle.lg}>Cricket match</Text>
-                    <Text style={[lucyStyle.xm]}>Tudhikhel, Kathmandu</Text>
+                    {props.children}
+                    {/*<Text style={lucyStyle.lg}>Cricket match</Text>*/}
+                    {/*<Text style={[lucyStyle.xm]}>Tudhikhel, Kathmandu</Text>*/}
                 </View>
 
             </Card>
@@ -68,19 +78,18 @@ export function HorizontalImageCard() {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         borderRadius: 8,
         padding: 16,
-        margin: 16,
-        shadowColor: '#000',
+        shadowColor: '#555',
         shadowOffset: {width: 0, height: 2},
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+        shadowOpacity: 1,
+        shadowRadius: 5,
         elevation: 3,
     },
     cardImage: {
-        height: 140,
-        width: 120,
+        height: 120,
+        width: 100,
         top: 0,
         left: 3,
         position: "absolute"
@@ -95,7 +104,5 @@ const styles = StyleSheet.create({
         top: 0,
         left: 3,
     },
-    horizontalCardContent:{
-
-    }
+    horizontalCardContent: {}
 })

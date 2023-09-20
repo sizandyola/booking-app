@@ -6,12 +6,16 @@ import HomeStack from "./HomeStack";
 import {Text} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {Colors} from "../styles";
+import AccountScreen from "../screens/account/AccountScreen";
+import PropertyList from "../screens/PropertyList";
+import HomeDrawerNavigator from "./HomeDrawerNavigator";
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
     return (
         <Tab.Navigator screenOptions={{
+            tabBarHideOnKeyboard: true,
             tabBarStyle: {
                 paddingTop: 7,
                 paddingBottom: 15,
@@ -29,19 +33,30 @@ export default function TabNavigator() {
             tabBarInactiveTintColor: 'gray'
         }}>
             <Tab.Screen
-                name="Events"
+                name="Home"
                 component={HomeStack}
                 options={{
                     headerShown: false,
+                    tabBarIcon: ({color}) => {
+                        return (
+                            <Ionicons name='home' size={24} color={color}/>
+                        )
+                    }
+                }}/>
+            <Tab.Screen
+                name="Property List"
+                component={PropertyList}
+                options={{
+                    headerShown: true,
                     tabBarIcon: ({color}) => {
                         return (
                             <Ionicons name='calendar-outline' size={24} color={color}/>
                         )
                     }
                 }}/>
-            <Tab.Screen name="About" component={AboutScreen}
+            <Tab.Screen name="About" component={HomeDrawerNavigator}
                         options={{
-                            headerShown: true,
+                            headerShown: false,
                             tabBarIcon: ({color}) => {
                                 return (
                                     <Ionicons name='md-help-circle-outline' size={24} color={color}/>
@@ -52,9 +67,38 @@ export default function TabNavigator() {
             <Tab.Screen name="Contact" component={ContactScreen}
                         options={{
                             headerShown: true,
+                            headerStyle: {
+                                height: 120,
+                                // backgroundColor: '#2C2C2C',
+                                // borderBottomLeftRadius : 20,
+                                // borderBottomRightRadius : 20
+                            },
+                            headerTitleStyle: {
+                                // color: '#fff'
+                            },
                             tabBarIcon: ({color}) => {
                                 return (
                                     <Ionicons name='call-outline' size={24} color={color}/>
+                                )
+                            }
+                        }}
+            />
+
+            <Tab.Screen name="Account" component={AccountScreen}
+                        options={{
+                            headerShown: true,
+                            headerStyle: {
+                                height: 120,
+                                // backgroundColor: '#2C2C2C',
+                                // borderBottomLeftRadius : 20,
+                                // borderBottomRightRadius : 20
+                            },
+                            headerTitleStyle: {
+                                // color: '#fff'
+                            },
+                            tabBarIcon: ({color}) => {
+                                return (
+                                    <Ionicons name='person' size={24} color={color}/>
                                 )
                             }
                         }}
